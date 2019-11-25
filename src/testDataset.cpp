@@ -9,7 +9,7 @@ void testDatasetClass()
 {
     // test constructors
     cout << "Creating dataset...\n";
-    Dataset<double> *ds = new Dataset<double>(3, 5);
+    Dataset<double> *ds = new Dataset<double>(3, 5, 100);
     cout << "Dataset created\n\n";
 
     // test accessing *data
@@ -28,8 +28,8 @@ void testDatasetClass()
         val = 4;
 
     cout << "Setting value of results[" << pos << "] to " << val << "\n";
-    ds->setResults(pos, val);
-    cout << "Value of results[" << pos << "] set to " << ds->getResults(pos) << "\n\n";
+    ds->setFitness(pos, val);
+    cout << "Value of results[" << pos << "] set to " << ds->getFitness(pos) << "\n\n";
 
     // test destructor
     cout << "Destroying dataset...\n";
