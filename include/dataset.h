@@ -14,16 +14,15 @@ private:
     int popSize;    // # of rows
     int dimensions; // # of columns
 
-    int iterations; // number of function calls
+    int funcCalls;  // number of function calls to perform
 
-    T bestInd;     // the index of the current best fitness
-    T 
-
-    T *results;     // results of the optimation algorithm
+    T bestInd;      // the index of the current best fitness
+    
+    T *fitness;     // the fitness of each set of values
 
 
 public:
-    // holds the random numbers
+    // holds the numbers to optimize
     Matrix<T> *data;
 
     // constructors and destructors

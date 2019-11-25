@@ -24,16 +24,11 @@ Dataset<T>::Dataset(int newPopSize, int newDims)
 template <class T>
 Dataset<T>::~Dataset()
 {
-    cout << "Deleting data...\n";
     if (data != nullptr)
         delete data;
-    cout << "Data deleted\n\n";
 
-
-    cout << "Deleting results...\n";
     if (results != nullptr)
         delete[] results;
-    cout << "Results deleted\n\n";
 }
 
 
@@ -75,8 +70,5 @@ T Dataset<T>::getResults(int position)
 }
 
 
-template class Dataset<short int>;
-template class Dataset<int>;
-template class Dataset<long int>;
 template class Dataset<float>;
 template class Dataset<double>;
