@@ -1,5 +1,5 @@
-#ifndef __TEST_DATASET__
-#define __TEST_DATASET__
+#ifndef TEST_DATASET_H
+#define TEST_DATASET_H
 
 void testDatasetClass();
 
