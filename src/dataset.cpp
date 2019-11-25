@@ -16,8 +16,11 @@ Dataset<T>::Dataset(int newPopSize, int newDims)
     // initialize the matrix
     data = new Matrix<T>(popSize, dimensions);
 
-    // initialize results array
-    results = new T[popSize];
+    // initialize fitness array
+    // fitness.length == popSize;
+    fitness = new T[popSize];
+
+    
 }
 
 
@@ -27,8 +30,8 @@ Dataset<T>::~Dataset()
     if (data != nullptr)
         delete data;
 
-    if (results != nullptr)
-        delete[] results;
+    if (fitness != nullptr)
+        delete[] fitness;
 }
 
 
@@ -47,28 +50,29 @@ int Dataset<T>::getPopSize()
 
 
 template <class T>
-void Dataset<T>::setResults(int position, T value)
+void Dataset<T>::setFitness(int position, T value)
 {
     // check for bounds
     if (0 > position || position >= popSize)
-        throw out_of_range ("Dataset.setResults");
+        throw out_of_range ("Dataset.setFitness");
 
     // set the value
-    results[position] = value;
+    fitness[position] = value;
 }
 
 
 template <class T>
-T Dataset<T>::getResults(int position)
+T Dataset<T>::getFitness(int position)
 {
     // check for bounds
     if (0 > position || position >= popSize)
-        throw out_of_range ("Dataset.getResults");
+        throw out_of_range ("Dataset.getFitness");
 
     // return the value
-    return results[position];
+    return fitness[position];
 }
 
 
+// allow only floats and doubles
 template class Dataset<float>;
 template class Dataset<double>;
