@@ -1,5 +1,5 @@
-#ifndef __DATASET__
-#define __DATASET__
+#ifndef DATASET_H
+#define DATASET_H
 
 #include <vector>
 #include "matrix.h"
@@ -17,7 +17,6 @@ private:
     int bestInd;      // the index of the current best fitness
 
     T *fitness;     // the fitness of each set of values
-
 
 public:
     Matrix<T> *data; // holds the numbers to optimize
