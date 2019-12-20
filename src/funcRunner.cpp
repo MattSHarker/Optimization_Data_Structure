@@ -1,11 +1,16 @@
+#include <iostream>
+#include <string>
 
+#include "funcRunner.h"
 
+using namespace std;
 
 namespace funcRunner
 {
-    runFunc(string func, T data, int size)
+    template <class T>
+    T runFunc(string func, T data, int size)
     {
-
+        // blah
     }
 
 }
