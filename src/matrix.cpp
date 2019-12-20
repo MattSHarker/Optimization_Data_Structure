@@ -13,7 +13,7 @@ Matrix<T>::Matrix(int size)
     cols = size;
 
     // initialize the vector matrix
-    vector<vector<T>> vecMatrix(size, vector<T>(size));
+    vector<vector<T>> matrix(size, vector<T>(size));
 }
 
 
@@ -25,17 +25,17 @@ Matrix<T>::Matrix(int newRows, int newCols)
     cols = newCols;
 
     // initialize the vector matrix
-    vector<vector<int>> vecMatrix(rows, vector<int>(cols));
+    vector<vector<int>> matrix(rows, vector<int>(cols));
 }
 
 
 // destructor
-template <class T>
-Matrix<T>::~Matrix()
-{
+// template <class T>
+// Matrix<T>::~Matrix()
+// {
 
-    // destruct the vector matrix
-}
+//     // destruct the vector matrix
+// }
 
 
 // setters and getters
@@ -50,7 +50,7 @@ void Matrix<T>::setValue(int row, int col, T value)
         throw out_of_range ("Matrix->setValue: cols");
 
     // set value of vector matrix
-    vecMatrix[row][col] = value;
+    matrix[row][col] = value;
 }
 
 
@@ -64,7 +64,7 @@ T Matrix<T>::getValue(int row, int col)
     if (0 > col || col >= cols)
         throw out_of_range ("Matrix->setValue: cols");
 
-    return vecMatrix[row][col];
+    return matrix[row][col];
 }
 
 
@@ -89,7 +89,7 @@ void Matrix<T>::print()
     for (int i = 0; i < rows; ++i)
     {
         for (int j = 0; j < cols; ++j)
-            cout << vecMatrix[i][j] << " ";
+            cout << matrix[i][j] << " ";
 
         cout << "\n";
     }
