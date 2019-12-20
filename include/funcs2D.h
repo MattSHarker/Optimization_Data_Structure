@@ -3,7 +3,10 @@
 
 // 2-D functions
 
-template <class T> T crossInTray(T* aryy);
-template <class T> T easom(T* arr);
+namespace funcs2D
+{
+    template <class T> T crossInTray(T* aryy);
+    template <class T> T easom(T* arr);
+}
 
 #endif

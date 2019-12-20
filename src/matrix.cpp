@@ -1,8 +1,8 @@
 #include <iostream>
+#include <vector>
 #include "matrix.h"
 
 using namespace std;
-
 
 // constructors
 template <class T>
@@ -12,10 +12,8 @@ Matrix<T>::Matrix(int size)
     rows = size;
     cols = size;
 
-    // initialize the matrix
-    matrix = new T*[rows];
-    for (int i = 0; i < rows; ++i)
-        matrix[i] = new T[cols];
+    // initialize the vector matrix
+    vector<vector<T>> matrix(size, vector<T>(size));
 }
 
 
@@ -26,25 +24,18 @@ Matrix<T>::Matrix(int newRows, int newCols)
     rows = newRows;
     cols = newCols;
 
-    // initialize the matrix
-    matrix = new T*[rows];
-    for (int i = 0; i < rows; ++i)
-        matrix[i] = new T[cols];
+    // initialize the vector matrix
+    vector<vector<int>> matrix(rows, vector<int>(cols));
 }
 
 
 // destructor
-template <class T>
-Matrix<T>::~Matrix()
-{
-    if (matrix != nullptr)
-    {
-        for (int i = 0; i < rows; i++)
-            delete [] matrix[i];
-        
-        delete[] matrix;
-    }
-}
+// template <class T>
+// Matrix<T>::~Matrix()
+// {
+
+//     // destruct the vector matrix
+// }
 
 
 // setters and getters
@@ -58,7 +49,7 @@ void Matrix<T>::setValue(int row, int col, T value)
     if (0 > col || col >= cols)
         throw out_of_range ("Matrix->setValue: cols");
 
-    // set value
+    // set value of vector matrix
     matrix[row][col] = value;
 }
 
@@ -73,7 +64,6 @@ T Matrix<T>::getValue(int row, int col)
     if (0 > col || col >= cols)
         throw out_of_range ("Matrix->setValue: cols");
 
-    // return value
     return matrix[row][col];
 }
 

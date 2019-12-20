@@ -10,7 +10,8 @@ private:
     int cols;
 
     // holds the data
-    T** matrix;
+    // replace T** matrix with this
+    Vector<Vector<T>> matrix;
 
 public:
     // constructors
@@ -18,7 +19,7 @@ public:
     Matrix(int rows, int cols);
 
     // destructor
-    ~Matrix();
+    // ~Matrix();
 
     // funcs for Matrix.matrix
     void setValue(int row, int col, T value);
