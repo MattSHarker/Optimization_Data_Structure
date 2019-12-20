@@ -8,9 +8,10 @@ private:
     // size variables
     int rows;
     int cols;
-
+    
     // holds the data
-    T** matrix;
+    // replace T** matrix with this
+    Vector<Vector<T>> vecMatrix;
 
 public:
     // constructors
