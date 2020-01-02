@@ -1,5 +1,4 @@
-#ifndef DATASET_H
-#define DATASET_H
+#pragma once
 
 #include <vector>
 #include "matrix.h"
@@ -37,7 +36,5 @@ public:
     // operator overlaods
     Dataset<T> operator = (Dataset const &first);
 };
-
-#endif
 
 //TODO: Add an assignment operator (=) overload for deep copies

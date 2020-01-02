@@ -1,5 +1,4 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#pragma once
 
 #include <vector>
 
@@ -33,5 +32,3 @@ public:
     // print to console
     void print();
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef BASE_FUNCTION_H
-#define BASE_FUNCTION_H
+#pragma once
 
 #include <vector>
 
@@ -14,5 +13,3 @@ namespace funcRunner {
     template <class T>
     T schwefel(std::vector<T>);
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CSV_WRITER_H
-#define CSV_WRITER_H
+#pragma once
 
 // things to write out:
     // the general info of the experiment
@@ -27,5 +26,3 @@ namespace csvWriter
     template <class T>
     void writeAll(Dataset<T> dataset);
 }
-
-#endif
