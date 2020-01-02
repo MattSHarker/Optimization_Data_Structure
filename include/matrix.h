@@ -1,6 +1,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <vector>
+
 template <class T>
 class Matrix
 {
@@ -10,8 +12,7 @@ private:
     int cols;
 
     // holds the data
-    // replace T** matrix with this
-    Vector<Vector<T>> matrix;
+    std::vector<std::vector< T >> matrix;
 
 public:
     // constructors

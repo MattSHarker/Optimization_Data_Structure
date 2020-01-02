@@ -16,10 +16,11 @@ private:
     int funcCalls;  // number of function calls to perform
     int bestInd;      // the index of the current best fitness
 
-    T *fitness;     // the fitness of each set of values
+    T *fitness;     // the fitness of each set of values (fitness.length == popSize)
 
 public:
     Matrix<T> *data; // holds the numbers to optimize
+                     // rows: popSize      cols: dims
     
     // constructors and destructors
     Dataset(int rows, int cols);
@@ -33,7 +34,10 @@ public:
     void setFitness(const int position, T value);
     T    getFitness(const int position);
 
-    
+    // operator overlaods
+    Dataset<T> operator = (Dataset const &first);
 };
 
 #endif
+
+//TODO: Add an assignment operator (=) overload for deep copies
