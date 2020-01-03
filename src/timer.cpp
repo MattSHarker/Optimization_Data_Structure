@@ -11,14 +11,13 @@ Timer::Timer()
     active = true;
 }
 
-
-void Timer::startTimer()
+void Timer::start()
 {
     if (active)
         time = clock();
 }
 
-void Timer::endTimer()
+void Timer::stop()
 {
     if (active)
         time = clock() - time;
@@ -46,4 +45,9 @@ void Timer::activate()
 void Timer::deactivate()
 {
     active = false;
+}
+
+bool Timer::activated()
+{
+    return active;
 }

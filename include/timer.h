@@ -12,12 +12,14 @@ private:
 public:
     Timer();
 
-    void startTimer();
-    void endTimer();
+    void start();
+    void stop();
 
-    double  getTimeMS()
+    double  getTimeMS();
     clock_t getTimeTicks();
 
     void activate();
     void deactivate();
-}
+
+    bool activated();
+};
