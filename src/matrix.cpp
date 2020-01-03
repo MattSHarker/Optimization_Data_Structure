@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "matrix.h"
 
 using namespace std;
@@ -12,30 +11,48 @@ Matrix<T>::Matrix(int size)
     rows = size;
     cols = size;
 
-    // initialize the vector matrix
-    vector<vector<T>> matrix(size, vector<T>(size));
+    // initialize the data matrix
+    matrix = new T*[rows];
+    for (int i = 0; i < rows; ++i)
+        matrix[i] = new T[cols];
 }
 
 
 template <class T>
 Matrix<T>::Matrix(int newRows, int newCols)
 {
+cout << "Initializing matrix..." << '\n';
+
     // set sizes
     rows = newRows;
     cols = newCols;
 
-    // initialize the vector matrix
-    vector<vector<int>> matrix(rows, vector<int>(cols));
+    // initialize the data matrix
+    matrix = new T*[rows];
+    for (int i = 0; i < rows; ++i)
+        matrix[i] = new T[cols];
+
+    
+cout << "Matrix initialilzed" << '\n';
 }
 
 
 // destructor
-// template <class T>
-// Matrix<T>::~Matrix()
-// {
+template <class T>
+Matrix<T>::~Matrix()
+{
+cout << "Destroying matrix...\n";
+    // destruct the data matrix
+    if (matrix != nullptr)
+    {
+        for (int i = 0; i < rows; ++i)
+            delete[] matrix[i];
 
-//     // destruct the vector matrix
-// }
+        delete[] matrix;
+    }
+
+cout << "Matrix destroyed\n";
+}
 
 
 // setters and getters
@@ -44,10 +61,16 @@ void Matrix<T>::setValue(int row, int col, T value)
 {
     // check for bounds
     if (0 > row || row >= rows)
-        throw out_of_range ("Matrix->setValue: rows");
+        if (row == rows)
+            throw out_of_range ("Matrix->setValue: rows (check for off by 1 error)");
+        else
+            throw out_of_range ("Matrix->setValue: rows");
 
     if (0 > col || col >= cols)
-        throw out_of_range ("Matrix->setValue: cols");
+        if (col == cols)
+            throw out_of_range ("Matrix->setValue: cols (check for off by 1 error)");
+        else
+            throw out_of_range ("Matrix->setValue: cols");
 
     // set value of vector matrix
     matrix[row][col] = value;
@@ -59,12 +82,24 @@ T Matrix<T>::getValue(int row, int col)
 {
     // check for bounds
     if (0 > row || row >= rows)
-        throw out_of_range ("Matrix->setValue: rows");
+        if (row == rows)
+            throw out_of_range ("Matrix->setValue: rows (check for off by 1 error");
+        else
+            throw out_of_range ("Matrix->setValue: rows");
 
     if (0 > col || col >= cols)
-        throw out_of_range ("Matrix->setValue: cols");
+        if (col == cols)
+            throw out_of_range ("Matrix->setValue: cols (check for off by 1 error");
+        else
+            throw out_of_range ("Matrix->setValue: cols");
 
     return matrix[row][col];
+}
+
+template <class T>
+T* Matrix<T>::getValueRow(int row)
+{
+    return matrix[row];
 }
 
 

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 template <class T>
 class Matrix
 {
@@ -11,7 +9,7 @@ private:
     int cols;
 
     // holds the data
-    std::vector<std::vector< T >> matrix;
+    T** matrix;
 
 public:
     // constructors
@@ -19,11 +17,12 @@ public:
     Matrix(int rows, int cols);
 
     // destructor
-    // ~Matrix();
+    ~Matrix();
 
     // funcs for Matrix.matrix
     void setValue(int row, int col, T value);
     T    getValue(int row, int col);
+    T*   getValueRow(int row);
 
     // funcs for Matrix.rows and Matrix.cols
     int getRows();
