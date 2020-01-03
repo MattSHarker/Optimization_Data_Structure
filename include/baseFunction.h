@@ -1,15 +1,15 @@
 #pragma once
 
-#include <vector>
+#include "dataset.h"
 
-namespace funcRunner {
-    // int func, T data, int size
+namespace baseFunction {
+
     template <class T>
-    T runBaseFunction(std::vector<T> data);
+    T runBaseFunction(Dataset<T>* data);
 
     // rename and redefine as necessary
     // these could be merged into one, but keeping it as
         // two should improve the readability
     template <class T>
-    T schwefel(std::vector<T>);
+    T schwefel(T* arr);
 }

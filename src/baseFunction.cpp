@@ -10,8 +10,16 @@ namespace funcRunner {
      * @return T    The result of running the vector through the base function.
      */
     template <class T>
-    T runBaseFunction(std::vector<T> data) {
-        return schwefel(data);
+    T runBaseFunction(Dataset<T>* data)
+    {
+        for (int i = 0; i < data->getRows(); ++i)
+            data->setFitness(i, runBaseFunction(data->getDataRow(i)));
+    }
+
+    template <class T>
+    T runBaseFunction(T* arr)
+    {
+        return schwefel(arr);
     }
 
     /**
@@ -22,11 +30,11 @@ namespace funcRunner {
      * @return T    The result of running the vector through the Schwefel function.
      */
     template <class T>
-    T schwefel(std::vector<T> data) {
-        T val = (418.9829 * data.size());
+    T schwefel(T* arr, int size) {
+        T val = (418.9829 * size);
 
-        for (int i = 0; i < data.size(); ++i)
-            val -= (0 - data.at(i)) * sin(sqrt(std::abs(data.at(i))));
+        for (int i = 0; i < size; ++i)
+            val -= (0 - arr[i]) * sin(sqrt(std::abs(arr[i])));
 
         return val;
     }
