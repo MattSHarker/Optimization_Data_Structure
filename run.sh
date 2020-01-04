@@ -2,4 +2,4 @@
 DATE=$(date +%Y-%m-%d-%H-%M)
 echo "DATE: $DATE"
 
-./build/dataset.out $DATE
+./.build/dataset.out $DATE

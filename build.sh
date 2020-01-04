@@ -7,8 +7,8 @@ mkdir -p results/data
 mkdir -p results/fitness
 
 # create the build directory and move to it
-mkdir -p build
-cd build
+mkdir -p .build
+cd .build
 
 # build the project
 cmake -DCMAKE_BUILD_TYPE=Release ../
