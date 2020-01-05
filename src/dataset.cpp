@@ -256,3 +256,5 @@ void Dataset<T>::printFitness()
 // allow only floats and doubles
 template class Dataset<float>;
 template class Dataset<double>;
+template class Dataset<long double>;
+

@@ -13,29 +13,24 @@ namespace csvWriter
     void writeData(Dataset<T>* dataset, string dir, int iter)
     {
         // write to $dir/results/data/data-iteration
-        string pathname = dir + "/results/data/data-"
-                        + dataset.getIteration().toString() + ".csv";
+        string pathname = "results/" + dir + "/data/data-"
+                        + to_string(iter) + ".csv";
 
-        cout << pathname << "/n";
+        cout << pathname << "\n";
 
         ofstream csv(pathname, ios::app);
 
         // write the entirety of dataset.matrix
-        for (int i = 0; i < dataset->getPopSize(); ++i)
+        for (int i = 0; i < dataset->getRows(); ++i)
         {
             // write the first element to prevent extra commas
-            csv  << dataset->matrix[i][0];
-            cout << dataset->matrix[i][0];
+            csv  << dataset->getData(i, 0);
 
-            for (int j = 0; j < dataset->getDimensions(); ++i)
-            {
-                csv  << "," << dataset->matrix[i][j];
-                cout << " " << dataset->matrix[i][j];
-            }
+            for (int j = 1; j < dataset->getCols(); ++j)
+                csv  << "," << dataset->getData(i, j);
 
             // add a newline
             csv  << '\n';
-            cout << '\n';
         }
 
         // close the file
@@ -43,18 +38,19 @@ namespace csvWriter
     }
 
     template <class T>
-    void writeFitness(Dataset<T> dataset, string dir)
+    void writeFitness(Dataset<T>* dataset, string dir, int iter)
     {
         // write to $dir/results/fitness/fitness-$iteration
-        string pathname = dir + "/results/fitness/fitness-" + dataset.getIteration().toString();
-        cout << "fitness pathname: " << pathname << "\n";
+        string pathname = "results/" + dir + "/fitness/fitness.csv";
+
+    cout << "fitness pathname: " << pathname << "\n";
 
         // create and open the file
         ofstream csv(pathname, ios::app);   // append to file
 
         // write the fitness to one line
-        csv << dataset->getFitness(0);  // write first line for no extra commas
-        for (int i = 1; i < dataset->popSize(); ++i)
+        csv << to_string(iter); // write the iteration
+        for (int i = 0; i < dataset->getRows(); ++i) // write the fitnesses
             csv << "," << dataset->getFitness(i);
 
         csv << '\n';
@@ -63,30 +59,41 @@ namespace csvWriter
         csv.close();
     }
 
-    void writeIterationTime(Timer* timer, string dir)
+    void writeIterationTime(Timer* timer, string dir, int iter)
     {
         // only write if the timer is active
         if (timer->activated())
         {
             // write to $dir/results/iterationTime/fitness-$iteration
-            string pathname = dir + "/results/iterationTime/iterationTime.csv";
+            string pathname = "results/" + dir + "/time/iterationTime.csv";
             cout << "iteration time pathname: " << pathname << "\n";
 
             // open the file in append mode
             ofstream csv(pathname, ios::app);
 
-            csv << timer->getTimeMS() << '\n';
+            csv << to_string(iter) << "," << timer->getTimeMS() << '\n';
 
             csv.close();
         }
     }
 
-
     template <class T>
-    void writeAll(Dataset<T> dataset, Timer* timer, string dir, int iteration)
+    void writeAll(Dataset<T>* dataset, Timer* timer, string dir, int iter)
     {
-        writeData(dataset, dir);
-        writeFitness(dataset, dir);
-        writeIterationTime(timer, dir);
+        writeData(dataset, dir, iter);
+        writeFitness(dataset, dir, iter);
+        writeIterationTime(timer, dir, iter);
     }
 }
+
+template void csvWriter::writeData(Dataset<float>*  data, string dir, int iter);
+template void csvWriter::writeData(Dataset<double>* data, string dir, int iter);
+template void csvWriter::writeData(Dataset<long double>* data, string dir, int iter);
+
+template void csvWriter::writeFitness(Dataset<float>*  data, string dir, int iter);
+template void csvWriter::writeFitness(Dataset<double>* data, string dir, int iter);
+template void csvWriter::writeFitness(Dataset<long double>* data, string dir, int iter);
+
+template void csvWriter::writeAll(Dataset<float>*  dataset, Timer* timer, std::string dir, int iter);
+template void csvWriter::writeAll(Dataset<double>* dataset, Timer* timer, std::string dir, int iter);
+template void csvWriter::writeAll(Dataset<long double>* dataset, Timer* timer, std::string dir, int iter);

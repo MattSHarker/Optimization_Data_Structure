@@ -52,5 +52,3 @@ public:
     void printData();
     void printFitness();
 };
-
-//TODO: Add an assignment operator (=) overload for deep copies

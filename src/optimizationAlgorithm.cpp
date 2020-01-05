@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-
+#include <string>
 
 #include "optimizationAlgorithm.h"
 #include "baseFunction.h"
@@ -10,15 +10,14 @@
 using namespace std;
 
 template <class T>
-void runOptimization(Dataset<T>* data, char* baseDir)
+void runOptimization(Dataset<T>* data, string baseDir)
 {
-    
-    string dir(baseDir);
-    blindWalk(data);
+    // run the optimization here
+    blindWalk(data, baseDir);
 }
 
 template <class T>
-void blindWalk(Dataset<T>* data)
+void blindWalk(Dataset<T>* data, string baseDir)
 {
     Timer* timer = new Timer();
 
@@ -37,15 +36,24 @@ void blindWalk(Dataset<T>* data)
         // randomize the values in data
         for (int j = 0; j < data->getRows(); ++j)
             for (int k = 0; k < data->getCols(); ++k)
-                data->setData(j, k, distribution(genertor));
+                data->setData(j, k, distribution(generator));
 
         // run the base function
-        baseFunction::runBaseFunction(data);
+        baseFunction(data);
 
         // stop the timer
         timer->stop();
 
         // write the data
-        csvWriter::writeAll(data, timer, "test", i);
+        // change i+1 to i to index iterations at 0
+        csvWriter::writeAll(data, timer, baseDir, i+1);
     }
 }
+
+template void runOptimization(Dataset<float>*  data, string baseDir);
+template void runOptimization(Dataset<double>* data, string baseDir);
+
+template void blindWalk(Dataset<float>*  data, string baseDir);
+template void blindWalk(Dataset<double>* data, string baseDir);
+
+// keep doing this to the other files as needed (ಥ﹏ಥ)

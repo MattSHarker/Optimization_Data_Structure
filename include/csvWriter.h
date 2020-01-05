@@ -8,18 +8,18 @@ namespace csvWriter
 {
     // write the dataset matrix to a file
     template <class T>
-    void writeData(Dataset<T> dataset, std::string dir, int iteration);
+    void writeData(Dataset<T>* dataset, std::string dir, int iteration);
 
     // write the fitness array to a file
     template <class T>
-    void writeFitness(Dataset<T> dataset, std::string dir);
+    void writeFitness(Dataset<T>* dataset, std::string dir, int iter);
 
     // write each iteration's elapsed time to a file
-    void writeIterationTime(Timer* timer, std::string dir);
+    void writeIterationTime(Timer* timer, std::string dir, int iter);
 
     // write all of the files
     template <class T>
-    void writeAll(Dataset<T> dataset, Timer* timer, std::string dir, int iteration);
+    void writeAll(Dataset<T>* dataset, Timer* timer, std::string dir, int iteration);
 }
 
 // Things to write to files:

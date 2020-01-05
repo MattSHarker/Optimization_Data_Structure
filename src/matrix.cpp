@@ -83,15 +83,15 @@ T Matrix<T>::getValue(int row, int col)
     // check for bounds
     if (0 > row || row >= rows)
         if (row == rows)
-            throw out_of_range ("Matrix->setValue: rows (check for off by 1 error");
+            throw out_of_range ("Matrix->getValue: rows (check for off by 1 error)");
         else
-            throw out_of_range ("Matrix->setValue: rows");
+            throw out_of_range ("Matrix->getValue: rows");
 
     if (0 > col || col >= cols)
         if (col == cols)
-            throw out_of_range ("Matrix->setValue: cols (check for off by 1 error");
+            throw out_of_range ("Matrix->getValue: cols (check for off by 1 error)");
         else
-            throw out_of_range ("Matrix->setValue: cols");
+            throw out_of_range ("Matrix->getValue: cols");
 
     return matrix[row][col];
 }
@@ -136,3 +136,4 @@ template class Matrix<int>;
 template class Matrix<long int>;
 template class Matrix<float>;
 template class Matrix<double>;
+template class Matrix<long double>;

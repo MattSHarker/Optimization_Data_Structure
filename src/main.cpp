@@ -1,24 +1,24 @@
 
 #include <iostream>
+#include <string> 
+
+#include "dataset.h"
 #include "testDataset.h"
 #include "optimizationAlgorithm.h"
 
 using namespace std;
 
-void run(){ testDatasetClass(); }
+// void run(){ testDatasetClass(); }
 
 int main(int argc, char* argv[])
 {
-    // run();
-    char* baseDir;
+    string baseDir;
 
     // check for args
-    if (argc == 0)
-        baseDir = "test";
+    if (argc >= 2)
+        baseDir = argv[1];
     else
-        baseDir = argv[0];
-
-cout << "baseDir: " << baseDir << endl;
+        baseDir = "default";
 
     // setup dataset
     Dataset<double>* data = new Dataset<double>(100, 10);
