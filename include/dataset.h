@@ -28,7 +28,7 @@ private:
 
 public:
     // constructors and destructors
-    Dataset(int rows, int cols);
+    Dataset(int populationSize, int dimensions);
     ~Dataset();
 
     // functions for cols and sets
@@ -36,13 +36,13 @@ public:
     int getCols();
 
     // functions for fitness
-    void setFitness(const int position, T value);
+    void setFitness(const int position, T newValue);
     T    getFitness(const int position);
 
     // functions for data
-    void setData(const uint row, const uint col, T value);
-    T    getData(const uint row, const uint col);
-    T*   getDataRow(const uint row);
+    void setData(const uint population, const uint dimension, T value);
+    T    getData(const uint population, const uint dimension);
+    T*   getDataRow(const uint population);
 
     // sort population by fitness (sorts rows as well)
     void sortFitnessLowToHigh();
