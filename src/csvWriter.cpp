@@ -13,11 +13,7 @@ namespace csvWriter
     void writeData(Dataset<T>* dataset, string dir, int iter)
     {
         // write to $dir/results/data/data-iteration
-        string pathname = "results/" + dir + "/data/data-"
-                        + to_string(iter) + ".csv";
-
-        cout << pathname << "\n";
-
+        string pathname = "results/" + dir + "/data/raw_data-" + to_string(iter) + ".csv";
         ofstream csv(pathname, ios::app);
 
         // write the entirety of dataset.matrix
@@ -33,7 +29,6 @@ namespace csvWriter
             csv  << '\n';
         }
 
-        // close the file
         csv.close();
     }
 
@@ -42,8 +37,6 @@ namespace csvWriter
     {
         // write to $dir/results/fitness/fitness-$iteration
         string pathname = "results/" + dir + "/fitness/fitness.csv";
-
-    cout << "fitness pathname: " << pathname << "\n";
 
         // create and open the file
         ofstream csv(pathname, ios::app);   // append to file
@@ -65,8 +58,7 @@ namespace csvWriter
         if (timer->activated())
         {
             // write to $dir/results/iterationTime/fitness-$iteration
-            string pathname = "results/" + dir + "/time/iterationTime.csv";
-            cout << "iteration time pathname: " << pathname << "\n";
+            string pathname = "results/" + dir + "/time/iteration_time.csv";
 
             // open the file in append mode
             ofstream csv(pathname, ios::app);
