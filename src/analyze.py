@@ -126,32 +126,29 @@ for i in range(iterations):
             # for each value in the row
             data = []
 
-            ctr = 0
             for val in row:
                 data.append(Decimal(val))
             
             fullData.append(data)
 
         # analyze each column (zip transposes cols to rows)
+        stdev.append(str(i+1))
         for row in zip(*fullData):
             stdev.append(statistics.stdev(row))
         
     # append to raw_data_stdev.csv
     with open(path + "/analysis/raw_data_stdev.csv", "a+") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(stdev)
+        # create the header if it's the first line
+        if i == 0:
+            header = "iteration"
+            for j in range(dims):
+                header += ",dim-" + str(j+1)
+            
+            csvfile.write(header+'\n')
 
-    # analyze and record the stdev data
-    stdev_stats = [min(stdev)]
-    stdev_stats.append(max(stdev))
-    stdev_stats.append(max(stdev) - min(stdev))
-    stdev_stats.append(statistics.mean(stdev))
-    stdev_stats.append(statistics.median(stdev))
-        
-    # append to (or create and write to) stdev_stats.csv
-    with open(path + "/analysis/rd_stdev_stats.csv", "a+") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(stdev_stats)
+        # write the data 
+        writer.writerow(stdev)
 
 print("raw_data_stdev.csv have been written\n")
 
@@ -174,14 +171,16 @@ with open(path + "/analysis/raw_data_stdev.csv", "r") as csvfile:
         temp = []
 
         # add each stdev
-        for val in row:
+        for val in row[1:]:
             temp.append(Decimal(val))
 
         stdev.append(temp)
     
+
     # analyze each column (transposed into rows)
+    ctr=1   
     for row in zip(*stdev):
-        temp = []
+        temp = [ctr] # iterations
         temp.append(min(row))
         temp.append(max(row))
         temp.append(max(row) - min(row))
@@ -192,10 +191,13 @@ with open(path + "/analysis/raw_data_stdev.csv", "r") as csvfile:
         # add temp stats list to full stats list 
         stats.append(temp)
 
+        # incriment counter
+        ctr+=1
+
     # create the stdev stats file
     with open(path + "/analysis/rd_stdev_stats.csv", "w") as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        csvfile.write("minimum,maximum,range,mean,median,stdev\n")
+        csvfile.write("dimension,minimum,maximum,range,mean,median,stdev\n")
         writer.writerows(stats)
 
 print("rd_stdev_stats.csv has been written")
