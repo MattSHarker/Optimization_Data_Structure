@@ -21,8 +21,6 @@ Matrix<T>::Matrix(int size)
 template <class T>
 Matrix<T>::Matrix(int newRows, int newCols)
 {
-cout << "Initializing matrix..." << '\n';
-
     // set sizes
     rows = newRows;
     cols = newCols;
@@ -31,9 +29,6 @@ cout << "Initializing matrix..." << '\n';
     matrix = new T*[rows];
     for (int i = 0; i < rows; ++i)
         matrix[i] = new T[cols];
-
-    
-cout << "Matrix initialilzed" << '\n';
 }
 
 
@@ -41,7 +36,6 @@ cout << "Matrix initialilzed" << '\n';
 template <class T>
 Matrix<T>::~Matrix()
 {
-cout << "Destroying matrix...\n";
     // destruct the data matrix
     if (matrix != nullptr)
     {
@@ -50,8 +44,6 @@ cout << "Destroying matrix...\n";
 
         delete[] matrix;
     }
-
-cout << "Matrix destroyed\n";
 }
 
 
