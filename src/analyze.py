@@ -24,6 +24,9 @@ with open("../parameters/dataset.txt") as file:
     list = file.readline().strip().split()  # split line by space
     popSize = int(list[1])                  # get the value
 
+with open("../parameters/optimization_algorithm.txt") as file:
+    list = file.readline().strip().split()
+    iterations = int(list[1])
 
 # analyze the iteration time file
 # stats: min, max, range, total(sum), mean, median, stdev
@@ -120,7 +123,7 @@ with open(path + "/function_calls/function_calls.csv", "r") as csvfile:
     
     # analyze the iteration times
     callStats = [[] for i in range(2)]
-    callStats[0].extend(["summation", "minimum", "maximum", "range", "total", "mean", "median", "stdev"])
+    callStats[0].extend(["total", "minimum", "maximum", "range", "total", "mean", "median", "stdev"])
     callStats[1].append(sum(funcCalls))
     callStats[1].append(min(funcCalls))
     callStats[1].append(max(funcCalls))
@@ -145,10 +148,7 @@ print("function_call_stats.csv has been written\n")
 
 print("Writing raw_data_stdev.csv")
 
-# for each file in results/bla/data
-iterations = 30
-# for each file
-
+# for each file in results/data/raw_data
 for i in range(iterations):
 
     # list to hold standard deviations

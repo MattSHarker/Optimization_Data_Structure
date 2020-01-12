@@ -35,4 +35,27 @@ namespace parameters
 
         file.close();
     }
+
+    void setAlgorithmParameters(algorithmParameters &algParams)
+    {
+        string tmpIterations;
+
+        ifstream file;
+        file.open("parameters/optimization_algorithm.txt");
+
+        // retreive the iterations
+        file >> tmpIterations;
+        file >> tmpIterations;
+
+        try
+        {
+            algParams.iterations = stoi(tmpIterations);
+        }
+        catch(const exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+
+        file.close();
+    }
 }

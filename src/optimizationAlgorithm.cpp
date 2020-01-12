@@ -12,12 +12,17 @@ using namespace std;
 template <class T>
 void runOptimization(Dataset<T>* data, string baseDir)
 {
+    // get the parameters for the optimization algorithm
+    parameters::algorithmParameters algParams;
+    parameters::setAlgorithmParameters(algParams);
+    cout << "iterations: " << algParams.iterations << endl;
+
     // run the optimization here
-    blindWalk(data, baseDir);
+    blindWalk(data, baseDir, algParams);
 }
 
 template <class T>
-void blindWalk(Dataset<T>* data, string baseDir)
+void blindWalk(Dataset<T>* data, string baseDir, parameters::algorithmParameters algParams)
 {
     Timer* timer = new Timer();
 
@@ -27,8 +32,8 @@ void blindWalk(Dataset<T>* data, string baseDir)
     mt19937 generator(rd());
     uniform_real_distribution<T> distribution(-512, 512);
 
-    // 30 iterations (arbitrary)
-    for (int i = 0; i < 30; ++i)
+    // for each iteration
+    for (int i = 0; i < algParams.iterations; ++i)
     {
         // start the timer
         timer->start();
@@ -55,7 +60,7 @@ void blindWalk(Dataset<T>* data, string baseDir)
 template void runOptimization(Dataset<float>*  data, string baseDir);
 template void runOptimization(Dataset<double>* data, string baseDir);
 
-template void blindWalk(Dataset<float>*  data, string baseDir);
-template void blindWalk(Dataset<double>* data, string baseDir);
+template void blindWalk(Dataset<float>*  data, string baseDir, parameters::algorithmParameters algParams);
+template void blindWalk(Dataset<double>* data, string baseDir, parameters::algorithmParameters algParams);
 
 // keep doing this to the other files as needed (ಥ﹏ಥ)
