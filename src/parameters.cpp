@@ -4,7 +4,6 @@
 
 #include "parameters.h"
 
-
 using namespace std;
 
 namespace parameters
@@ -16,7 +15,12 @@ namespace parameters
         ifstream file;
         file.open("parameters/dataset.txt");
         
+        // retreive the number of dimensions
+        file >> tmpCols;    // twice to skip description
         file >> tmpCols;
+
+        // retreive the population size
+        file >> tmpRows;    // twice to skip description
         file >> tmpRows;
 
         try

@@ -18,8 +18,11 @@ else:
 # open dataset parameter file to get dimensions
 dims = 0
 with open("../parameters/dataset.txt") as file:
-    dims    = int(file.readline().strip())  # strip() to remove the newline
-    popSize = int(file.readline().strip())
+    list = file.readline().strip().split()  # split line by space
+    dims = int(list[1])                     # get the value
+
+    list = file.readline().strip().split()  # split line by space
+    popSize = int(list[1])                  # get the value
 
 
 # analyze the iteration time file
