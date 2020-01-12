@@ -15,10 +15,7 @@ int main(int argc, char* argv[])
     string baseDir;
 
     // check for args
-    if (argc >= 2)
-        baseDir = argv[1];
-    else
-        baseDir = "default";
+    baseDir = (argc >= 2) ? argv[1] : "default";
 
     // setup dataset
     Dataset<double>* data = new Dataset<double>();
