@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
         baseDir = "default";
 
     // setup dataset
-    Dataset<double>* data = new Dataset<double>(100, 10);
+    Dataset<double>* data = new Dataset<double>(5, 4);
 
     runOptimization(data, baseDir);
 

@@ -10,6 +10,10 @@ Dataset<T>::Dataset(int newRows, int newCols)
     rows = newRows;
     cols = newCols;
 
+    // set initial funcCalls to 0, as no
+        //function calls have been made
+    funcCalls = 0;
+
     // initialize the matrix
     data = new Matrix<T>(rows, cols);
 
@@ -43,6 +47,24 @@ int Dataset<T>::getCols()
     return cols;
 }
 
+template <class T>
+void Dataset<T>::incrimentFuncCalls()
+{
+    ++funcCalls;
+}
+
+template <class T>
+void Dataset<T>::resetFuncCalls()
+{
+    funcCalls = 0;
+}
+
+
+template <class T>
+uint Dataset<T>::getFuncCalls()
+{
+    return funcCalls;
+}
 
 template <class T>
 void Dataset<T>::setFitness(int position, T value)

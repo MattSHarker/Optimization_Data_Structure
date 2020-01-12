@@ -1,6 +1,17 @@
 #include <cmath>
 #include "baseFunction.h"
 
+
+template <class T>
+void baseFunctionFull(Dataset<T>* data)
+{
+    for (int i = 0; i < data->getRows(); ++i)
+    {
+        baseFunctionOnce(data, i);
+    }
+}
+
+
 /**
  * @brief Runs the base function to be optimized.
  * 
@@ -9,14 +20,15 @@
  * @return T    The result of running the vector through the base function.
  */
 template <class T>
-void baseFunction(Dataset<T>* data)
+void baseFunctionOnce(Dataset<T>* data, int row)
 {
-    for (int i = 0; i < data->getRows(); ++i)
-        data->setFitness(i, baseFunction(data->getDataRow(i), data->getCols()));
+    data->setFitness(row, runBaseFunction(data->getDataRow(row), data->getCols()));
+    data->incrimentFuncCalls();
 }
 
+
 template <class T>
-T baseFunction(T* arr, int size)
+T runBaseFunction(T* arr, int size)
 {
     return schwefel(arr, size);
 }
@@ -38,13 +50,17 @@ T schwefel(T* arr, int size) {
     return val;
 }
 
-template void baseFunction(Dataset<float>*       data);
-template void baseFunction(Dataset<double>*      data);
-template void baseFunction(Dataset<long double>* data);
+template void baseFunctionFull(Dataset<float>*       data);
+template void baseFunctionFull(Dataset<double>*      data);
+template void baseFunctionFull(Dataset<long double>* data);
 
-template float       baseFunction(float*       arr, int size);
-template double      baseFunction(double*      arr, int size);
-template long double baseFunction(long double* arr, int size);
+template void baseFunctionOnce(Dataset<float>*       data, int row);
+template void baseFunctionOnce(Dataset<double>*      data, int row);
+template void baseFunctionOnce(Dataset<long double>* data, int row);
+
+template float       runBaseFunction(float*       arr, int size);
+template double      runBaseFunction(double*      arr, int size);
+template long double runBaseFunction(long double* arr, int size);
 
 template float       schwefel(float*       arr, int size);
 template double      schwefel(double*      arr, int size);

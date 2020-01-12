@@ -33,6 +33,24 @@ namespace csvWriter
     }
 
     template <class T>
+    void writeFuncCalls(Dataset<T>* dataset, string dir, int iter)
+    {
+        // write to $dir/results/fitness/fitness-$iteration
+        string pathname = "results/" + dir + "/function_calls/function_calls.csv";
+
+        // create and open the file
+        ofstream csv(pathname, ios::app);   // append to file
+
+        // append the iteration and function calls to the file
+        csv << to_string(iter) << "," << dataset->getFuncCalls();
+
+        csv << '\n';
+
+        // close the file
+        csv.close();
+    }
+
+    template <class T>
     void writeFitness(Dataset<T>* dataset, string dir, int iter)
     {
         // write to $dir/results/fitness/fitness-$iteration
@@ -41,9 +59,9 @@ namespace csvWriter
         // create and open the file
         ofstream csv(pathname, ios::app);   // append to file
 
-        // write the fitness to one line
-        csv << to_string(iter); // write the iteration
-        for (int i = 0; i < dataset->getRows(); ++i) // write the fitnesses
+        // write the iteration and fitnesses to the file
+        csv << to_string(iter);
+        for (int i = 0; i < dataset->getRows(); ++i)
             csv << "," << dataset->getFitness(i);
 
         csv << '\n';
@@ -63,8 +81,10 @@ namespace csvWriter
             // open the file in append mode
             ofstream csv(pathname, ios::app);
 
+            // write the data to the file
             csv << to_string(iter) << "," << timer->getTimeMS() << '\n';
 
+            // close the file
             csv.close();
         }
     }
@@ -72,15 +92,22 @@ namespace csvWriter
     template <class T>
     void writeAll(Dataset<T>* dataset, Timer* timer, string dir, int iter)
     {
+        // run each individual function
         writeData(dataset, dir, iter);
         writeFitness(dataset, dir, iter);
+        writeFuncCalls(dataset, dir, iter);
         writeIterationTime(timer, dir, iter);
     }
 }
 
+// create each possible Type usage for each function
 template void csvWriter::writeData(Dataset<float>*  data, string dir, int iter);
 template void csvWriter::writeData(Dataset<double>* data, string dir, int iter);
 template void csvWriter::writeData(Dataset<long double>* data, string dir, int iter);
+
+template void csvWriter::writeFuncCalls(Dataset<float>*  data, string dir, int iter);
+template void csvWriter::writeFuncCalls(Dataset<double>* data, string dir, int iter);
+template void csvWriter::writeFuncCalls(Dataset<long double>* data, string dir, int iter);
 
 template void csvWriter::writeFitness(Dataset<float>*  data, string dir, int iter);
 template void csvWriter::writeFitness(Dataset<double>* data, string dir, int iter);

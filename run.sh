@@ -9,6 +9,8 @@ rm -rf results/$DATE
 mkdir -p results/$DATE/data
 mkdir -p results/$DATE/fitness
 mkdir -p results/$DATE/time
+mkdir -p results/$DATE/function_calls
+
 
 # run the optimization
 ./.build/dataset.out $DATE

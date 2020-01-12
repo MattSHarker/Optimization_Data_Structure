@@ -27,14 +27,15 @@ with open("../parameters/dataset.txt") as file:
 # rows: 1
 
 # create list for data
-iter_stats = [[] for i in range(2)]
-iter_stats[0].extend(["minimum", "maximum", "range", "total", "mean", "median", "stdev"])
 
 # open the data file
 print("Writing iteration_time.csv")
 with open(path + "/time/iteration_time.csv") as csvfile:
     timeCSV = csv.reader(csvfile, delimiter=',')
     
+    iter_stats = [[] for i in range(2)]
+    iter_stats[0].extend(["minimum", "maximum", "range", "total", "mean", "median", "stdev"])
+
     # read in the iteration times
     times = []
     for row in timeCSV:
@@ -97,6 +98,40 @@ with open(path + "/analysis/fitness_stats.csv", 'w', newline='') as csvfile:
     filewriter = csv.writer(csvfile, delimiter=',')
     filewriter.writerows(fitness_stats)
 print("fitness_stats.csv has been written\n")
+
+
+
+# analyze the function call data
+# total, min, max, range, mean, median, stdev
+# rows: iterations
+print("Writing function_call_stats.csv")
+
+
+with open(path + "/function_calls/function_calls.csv", "r") as csvfile:
+    funcCallsCSV = csv.reader(csvfile, delimiter=',')
+
+    # read in the function calls per iteration
+    funcCalls = []
+    for row in funcCallsCSV:
+        funcCalls.append(Decimal(row[1].strip())) # add times to a temp list
+    
+    # analyze the iteration times
+    callStats = [[] for i in range(2)]
+    callStats[0].extend(["summation", "minimum", "maximum", "range", "total", "mean", "median", "stdev"])
+    callStats[1].append(sum(funcCalls))
+    callStats[1].append(min(funcCalls))
+    callStats[1].append(max(funcCalls))
+    callStats[1].append(max(funcCalls) - min(funcCalls))
+    callStats[1].append(sum(funcCalls))
+    callStats[1].append(statistics.mean(funcCalls))
+    callStats[1].append(statistics.median(funcCalls))
+    callStats[1].append(statistics.stdev(funcCalls))
+
+# write the fitness stats
+with open(path + "/analysis/function_call_stats.csv", 'w', newline='') as csvfile:
+    filewriter = csv.writer(csvfile, delimiter=',')
+    filewriter.writerows(callStats)
+print("function_call_stats.csv has been written\n")
 
 
 

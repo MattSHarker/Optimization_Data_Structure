@@ -5,6 +5,7 @@ rm -rf results/test
 mkdir -p results/test/data
 mkdir -p results/test/fitness
 mkdir -p results/test/time
+mkdir -p results/test/function_calls
 
 # run the optimization
 ./.build/dataset.out "test"

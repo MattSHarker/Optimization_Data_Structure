@@ -12,8 +12,7 @@ private:
     int rows;    // # of sets of data (rows)
     int cols; // size of each set  (columns)
 
-    int funcCalls;  // number of function calls to perform
-    int bestInd;      // the index of the current best fitness
+    uint funcCalls;  // number of function calls that have been performed
 
     T *fitness;     // the fitness of each set of values (fitness.length == popSize)
 
@@ -34,6 +33,11 @@ public:
     // functions for cols and sets
     int getRows();
     int getCols();
+
+    // functions for funcCalls
+    void incrimentFuncCalls();
+    void resetFuncCalls();
+    uint getFuncCalls();
 
     // functions for fitness
     void setFitness(const int position, T newValue);

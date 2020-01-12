@@ -39,7 +39,7 @@ void blindWalk(Dataset<T>* data, string baseDir)
                 data->setData(j, k, distribution(generator));
 
         // run the base function
-        baseFunction(data);
+        baseFunctionFull(data);
 
         // stop the timer
         timer->stop();
@@ -47,6 +47,8 @@ void blindWalk(Dataset<T>* data, string baseDir)
         // write the data
         // change i+1 to i to index iterations at 0
         csvWriter::writeAll(data, timer, baseDir, i+1);
+
+        data->resetFuncCalls();
     }
 }
 
