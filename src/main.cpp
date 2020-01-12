@@ -1,10 +1,10 @@
-
 #include <iostream>
 #include <string> 
 
 #include "dataset.h"
 #include "testDataset.h"
 #include "optimizationAlgorithm.h"
+#include "parameters.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
         baseDir = "default";
 
     // setup dataset
-    Dataset<double>* data = new Dataset<double>(5, 4);
+    Dataset<double>* data = new Dataset<double>();
 
     runOptimization(data, baseDir);
 

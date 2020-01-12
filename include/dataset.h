@@ -28,6 +28,7 @@ private:
 public:
     // constructors and destructors
     Dataset(int populationSize, int dimensions);
+    Dataset();
     ~Dataset();
 
     // functions for cols and sets

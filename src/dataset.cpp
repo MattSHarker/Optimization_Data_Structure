@@ -1,5 +1,6 @@
 #include <iostream>
 #include "dataset.h"
+#include "parameters.h"
 
 using namespace std;
 
@@ -18,7 +19,23 @@ Dataset<T>::Dataset(int newRows, int newCols)
     data = new Matrix<T>(rows, cols);
 
     // initialize fitness array
-    // fitness.length == rows;
+    fitness = new T[rows];
+}
+
+template <class T>
+Dataset<T>::Dataset()
+{
+    // read the row and column info from the parameter file
+    parameters::setPopulationParameters(rows, cols);
+
+    // set initial funcCalls to 0, as no
+        // function calls have been made
+    funcCalls = 0;
+
+    // initialize the matrix
+    data = new Matrix<T>(rows, cols);
+
+    // initialize fitness array
     fitness = new T[rows];
 }
 

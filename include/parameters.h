@@ -1,6 +1,6 @@
 #pragma once
 
-void optimizationParameters()
+namespace parameters
 {
-    
+    void setPopulationParameters(int &populationSize, int &dimensions);
 }

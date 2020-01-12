@@ -1,5 +1,5 @@
-4
-5
+30
+100
 
-# dimensions
-# population size
+# dimensions (rows)
+# population size (cols)
