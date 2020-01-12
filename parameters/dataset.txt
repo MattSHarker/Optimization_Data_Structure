@@ -1,5 +1,2 @@
-30
-100
-
-# dimensions (rows)
-# population size (cols)
+dimensions: 30
+population_size: 100
