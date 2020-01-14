@@ -5,11 +5,13 @@
 using namespace std;
 
 template <class T>
-Dataset<T>::Dataset(int newRows, int newCols)
+Dataset<T>::Dataset(int newRows, int newCols, float newLow, float newHigh)
 {
     // set the size variables
-    rows = newRows;
-    cols = newCols;
+    rows      = newRows;
+    cols      = newCols;
+    rangeLow  = newLow;
+    rangeHigh = newHigh;
 
     // set initial funcCalls to 0, as no
         //function calls have been made
@@ -26,7 +28,7 @@ template <class T>
 Dataset<T>::Dataset()
 {
     // read the row and column info from the parameter file
-    parameters::setPopulationParameters(rows, cols);
+    parameters::setPopulationParameters(rows, cols, rangeLow, rangeHigh);
 
     // set initial funcCalls to 0, as no
         // function calls have been made
@@ -62,6 +64,20 @@ template <class T>
 int Dataset<T>::getCols()
 {
     return cols;
+}
+
+
+
+template <class T>
+float Dataset<T>::getRangeLow()
+{
+    return rangeLow;
+}
+
+template <class T>
+float Dataset<T>::getRangeHigh()
+{
+    return rangeHigh;
 }
 
 template <class T>
@@ -292,8 +308,7 @@ void Dataset<T>::printFitness()
     cout << endl;
 }
 
-// allow only floats and doubles
+// allow only floating point types
 template class Dataset<float>;
 template class Dataset<double>;
 template class Dataset<long double>;
-

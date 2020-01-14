@@ -15,7 +15,6 @@ void runOptimization(Dataset<T>* data, string baseDir)
     // get the parameters for the optimization algorithm
     parameters::algorithmParameters algParams;
     parameters::setAlgorithmParameters(algParams);
-    cout << "iterations: " << algParams.iterations << endl;
 
     // run the optimization here
     blindWalk(data, baseDir, algParams);

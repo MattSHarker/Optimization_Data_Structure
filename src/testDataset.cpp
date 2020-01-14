@@ -11,7 +11,7 @@ void testDatasetClass()
 {
     // test constructors
 cout << "Creating dataset...\n";
-    Dataset<double> *ds = new Dataset<double>(3, 5);
+    Dataset<double> *ds = new Dataset<double>(3, 5, 0, 10);
 cout << "Dataset created\n\n";
 
 cout << "Rows: " << ds->getRows() << endl;
@@ -43,7 +43,7 @@ cout << "Dataset destroyed\n";
 
 
     // set values to test sorting
-    Dataset<double> *ds2 = new Dataset<double>(4, 4);
+    Dataset<double> *ds2 = new Dataset<double>(4, 4, -20, 20);
     for (int i = 1; i <= 4; i++)
         for (int j = 1; j <= 4; j++)
             ds2->setData(i-1, j-1, j + (i*100));
