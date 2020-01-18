@@ -15,9 +15,9 @@ private:
     float rangeLow;     // the lowest possible value for values in the data matrix
     float rangeHigh;    // the high possible value for values in the data matrix
 
-    uint funcCalls; // number of function calls that have been performed
+    uint funcCalls;     // number of function calls that have been performed
 
-    T *fitness;     // the fitness of each set of values (fitness.length == popSize)
+    T *fitness;         // the fitness of each set of values (fitness.length == popSize)
 
     Matrix<T> *data;    // holds the numbers to optimize
                         // rows: popSize      cols: dims
