@@ -13,8 +13,7 @@ Dataset<T>::Dataset(int newRows, int newCols, float newLow, float newHigh)
     rangeLow  = newLow;
     rangeHigh = newHigh;
 
-    // set initial funcCalls to 0, as no
-        //function calls have been made
+    // set initial funcCalls to 0, as no function calls have been made
     funcCalls = 0;
 
     // initialize the matrix
@@ -28,10 +27,9 @@ template <class T>
 Dataset<T>::Dataset()
 {
     // read the row and column info from the parameter file
-    parameters::setPopulationParameters(rows, cols, rangeLow, rangeHigh);
+    parameters::setDatasetParameters(rows, cols, rangeLow, rangeHigh);
 
-    // set initial funcCalls to 0, as no
-        // function calls have been made
+    // set initial funcCalls to 0, as no function calls have been made
     funcCalls = 0;
 
     // initialize the matrix
@@ -67,7 +65,6 @@ int Dataset<T>::getCols()
 }
 
 
-
 template <class T>
 float Dataset<T>::getRangeLow()
 {
@@ -91,7 +88,6 @@ void Dataset<T>::resetFuncCalls()
 {
     funcCalls = 0;
 }
-
 
 template <class T>
 uint Dataset<T>::getFuncCalls()
@@ -188,6 +184,7 @@ int Dataset<T>::partitionLowToHigh(int left, int right)
             // deep swap the entire row at data[small] and data[i] 
             for (int j = 0; j < cols; ++j)
             {
+                // swap(data.matrix[small][j], data.matrix[i][j])
                 T temp = data->getValue(small, j);
                 data->setValue(small, j, data->getValue(i, j));
                 data->setValue(i, j, temp);
@@ -196,10 +193,12 @@ int Dataset<T>::partitionLowToHigh(int left, int right)
         }
     }
 
+    // swap fitness[small+1] and fitness[right]
     T temp = fitness[small+1];
     fitness[small+1] = fitness[right];
     fitness[right] = temp;
 
+    // swap(matrix.data[small+1], matrix.data[right])
     for (int i = 0; i < cols; ++i)
     {
         T temp = data->getValue(small+1, i);
@@ -242,10 +241,12 @@ int Dataset<T>::partitionHighToLow(int left, int right)
         }
     }
 
+    // swap(matrix.data[small+1], matrix.data[right])
     T temp = fitness[small+1];
     fitness[small+1] = fitness[right];
     fitness[right] = temp;
 
+    // swap(matrix.data[small+1], matrix.data[right])
     for (int i = 0; i < cols; ++i)
     {
         T temp = data->getValue(small+1, i);

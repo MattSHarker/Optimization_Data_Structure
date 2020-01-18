@@ -2,8 +2,8 @@
 
 namespace parameters
 {
-    struct algorithmParameters { int iterations; };
+    struct optimizationParameters { int iterations; };
 
-    void setPopulationParameters(int &populationSize, int &dimensions, float &rangeLow, float &rangeHigh);
-    void setAlgorithmParameters(algorithmParameters &algorithmParams);
+    void setDatasetParameters(int &populationSize, int &dimensions, float &rangeLow, float &rangeHigh);
+    void setOptimizationParameters(optimizationParameters &optimizationParameters);
 }
