@@ -30,22 +30,25 @@ void baseFunctionOnce(Dataset<T>* data, int row)
 template <class T>
 T runBaseFunction(T* arr, int size)
 {
-    return schwefel(arr, size);
+    return summation(arr, size);
 }
 
 /**
- * @brief Runs the Scwefel function on a vector of data.
+ * @brief Finds the sum of an array's elements
  * 
  * @tparam T    The type of data being used (float, double, etc.).
- * @param data  A vector of values to be ran through the Schwefel function.
- * @return T    The result of running the vector through the Schwefel function.
+ * @param data  A vector of values to be ran through the function.
+ * @return T    The result of running the vector through the function.
  */
 template <class T>
-T schwefel(T* arr, int size) {
-    T val = (418.9829 * size);
+T summation(T* arr, int size)
+{
+    T val = 0.0;
 
     for (int i = 0; i < size; ++i)
-        val -= (0 - arr[i]) * sin(sqrt(std::abs(arr[i])));
+    {
+        val += arr[i];
+    }
 
     return val;
 }
@@ -62,6 +65,6 @@ template float       runBaseFunction(float*       arr, int size);
 template double      runBaseFunction(double*      arr, int size);
 template long double runBaseFunction(long double* arr, int size);
 
-template float       schwefel(float*       arr, int size);
-template double      schwefel(double*      arr, int size);
-template long double schwefel(long double* arr, int size);
+template float       summation(float*       arr, int size);
+template double      summation(double*      arr, int size);
+template long double summation(long double* arr, int size);
