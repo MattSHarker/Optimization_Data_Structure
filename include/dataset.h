@@ -9,15 +9,18 @@ template <class T>
 class Dataset
 {
 private:
-    int rows;    // # of sets of data (rows)
-    int cols; // size of each set  (columns)
+    int rows;   // # of sets of data (rows)
+    int cols;   // size of each set  (columns)
 
-    uint funcCalls;  // number of function calls that have been performed
+    float rangeLow;     // the lowest possible value for values in the data matrix
+    float rangeHigh;    // the high possible value for values in the data matrix
 
-    T *fitness;     // the fitness of each set of values (fitness.length == popSize)
+    uint funcCalls;     // number of function calls that have been performed
 
-    Matrix<T> *data; // holds the numbers to optimize
-                     // rows: popSize      cols: dims
+    T *fitness;         // the fitness of each set of values (fitness.length == popSize)
+
+    Matrix<T> *data;    // holds the numbers to optimize
+                        // rows: popSize      cols: dims
 
     // functions for sorting fitness and data (quick sort)
     int partitionLowToHigh(int left, int right);
@@ -27,13 +30,17 @@ private:
 
 public:
     // constructors and destructors
-    Dataset(int populationSize, int dimensions);
+    Dataset(int populationSize, int dimensions, float newRangeLow, float newRangeHigh);
     Dataset();
     ~Dataset();
 
     // functions for cols and sets
     int getRows();
     int getCols();
+
+    // functions for rangeLow and rangeHigh
+    float getRangeLow();
+    float getRangeHigh();
 
     // functions for funcCalls
     void incrimentFuncCalls();

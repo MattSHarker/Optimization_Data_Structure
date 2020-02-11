@@ -5,14 +5,15 @@
 using namespace std;
 
 template <class T>
-Dataset<T>::Dataset(int newRows, int newCols)
+Dataset<T>::Dataset(int newRows, int newCols, float newLow, float newHigh)
 {
     // set the size variables
-    rows = newRows;
-    cols = newCols;
+    rows      = newRows;
+    cols      = newCols;
+    rangeLow  = newLow;
+    rangeHigh = newHigh;
 
-    // set initial funcCalls to 0, as no
-        //function calls have been made
+    // set initial funcCalls to 0, as no function calls have been made
     funcCalls = 0;
 
     // initialize the matrix
@@ -26,10 +27,9 @@ template <class T>
 Dataset<T>::Dataset()
 {
     // read the row and column info from the parameter file
-    parameters::setPopulationParameters(rows, cols);
+    parameters::setDatasetParameters(rows, cols, rangeLow, rangeHigh);
 
-    // set initial funcCalls to 0, as no
-        // function calls have been made
+    // set initial funcCalls to 0, as no function calls have been made
     funcCalls = 0;
 
     // initialize the matrix
@@ -64,6 +64,19 @@ int Dataset<T>::getCols()
     return cols;
 }
 
+
+template <class T>
+float Dataset<T>::getRangeLow()
+{
+    return rangeLow;
+}
+
+template <class T>
+float Dataset<T>::getRangeHigh()
+{
+    return rangeHigh;
+}
+
 template <class T>
 void Dataset<T>::incrimentFuncCalls()
 {
@@ -75,7 +88,6 @@ void Dataset<T>::resetFuncCalls()
 {
     funcCalls = 0;
 }
-
 
 template <class T>
 uint Dataset<T>::getFuncCalls()
@@ -172,6 +184,7 @@ int Dataset<T>::partitionLowToHigh(int left, int right)
             // deep swap the entire row at data[small] and data[i] 
             for (int j = 0; j < cols; ++j)
             {
+                // swap(data.matrix[small][j], data.matrix[i][j])
                 T temp = data->getValue(small, j);
                 data->setValue(small, j, data->getValue(i, j));
                 data->setValue(i, j, temp);
@@ -180,10 +193,12 @@ int Dataset<T>::partitionLowToHigh(int left, int right)
         }
     }
 
+    // swap fitness[small+1] and fitness[right]
     T temp = fitness[small+1];
     fitness[small+1] = fitness[right];
     fitness[right] = temp;
 
+    // swap(matrix.data[small+1], matrix.data[right])
     for (int i = 0; i < cols; ++i)
     {
         T temp = data->getValue(small+1, i);
@@ -226,10 +241,12 @@ int Dataset<T>::partitionHighToLow(int left, int right)
         }
     }
 
+    // swap(matrix.data[small+1], matrix.data[right])
     T temp = fitness[small+1];
     fitness[small+1] = fitness[right];
     fitness[right] = temp;
 
+    // swap(matrix.data[small+1], matrix.data[right])
     for (int i = 0; i < cols; ++i)
     {
         T temp = data->getValue(small+1, i);
@@ -292,8 +309,7 @@ void Dataset<T>::printFitness()
     cout << endl;
 }
 
-// allow only floats and doubles
+// allow only floating point types
 template class Dataset<float>;
 template class Dataset<double>;
 template class Dataset<long double>;
-

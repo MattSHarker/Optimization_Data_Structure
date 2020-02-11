@@ -15,7 +15,5 @@ template <class T>
 T runBaseFunction(T* arr, int size);
 
 // rename and redefine as necessary
-// these could be merged into one, but keeping it as
-    // two should improve the readability
 template <class T>
-T schwefel(T* arr, int size);
+T summation(T* arr, int size);
