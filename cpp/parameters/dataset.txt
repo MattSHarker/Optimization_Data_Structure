@@ -1,0 +1,2 @@
+dimensions: 30
+population_size: 100
