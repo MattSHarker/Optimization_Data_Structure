@@ -21,6 +21,4 @@ double getValue(Matrix* matrix, unsigned int row, unsigned int col);
 unsigned int getRows(Matrix* matrix);
 unsigned int getCols(Matrix* matrix);
 
-
-
 #endif  /* MATRIX_H */
