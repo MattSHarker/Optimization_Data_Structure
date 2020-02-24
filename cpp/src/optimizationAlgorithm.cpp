@@ -26,8 +26,7 @@ void blindWalk(Dataset<T>* data, string baseDir, parameters::algorithmParameters
 {
     Timer* timer = new Timer();
 
-    // set up MT19937ar for randomization, with bounds set
-        // by the base function
+    // set up MT19937ar for randomization, with bounds set by the base function
     random_device rd;
     mt19937 generator(rd());
     uniform_real_distribution<T> distribution(-512, 512);
