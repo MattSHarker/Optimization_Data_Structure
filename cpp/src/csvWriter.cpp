@@ -72,21 +72,17 @@ namespace csvWriter
 
     void writeIterationTime(Timer* timer, string dir, int iter)
     {
-        // only write if the timer is active
-        if (timer->activated())
-        {
-            // write to $dir/results/iterationTime/fitness-$iteration
-            string pathname = "results/" + dir + "/time/iteration_time.csv";
+        // write to $dir/results/iterationTime/fitness-$iteration
+        string pathname = "results/" + dir + "/time/iteration_time.csv";
 
-            // open the file in append mode
-            ofstream csv(pathname, ios::app);
+        // open the file in append mode
+        ofstream csv(pathname, ios::app);
 
-            // write the data to the file
-            csv << to_string(iter) << "," << timer->getTimeMS() << '\n';
+        // write the data to the file
+        csv << to_string(iter) << "," << timer->getTimeMS() << '\n';
 
-            // close the file
-            csv.close();
-        }
+        // close the file
+        csv.close();
     }
 
     template <class T>
